@@ -1,0 +1,46 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: order-service
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:dealer}
+    password: ${RABBITMQ_PASSWORD:dealer-local}
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    template:
+      mandatory: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/order_db
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres-local}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${JWT_ISSUER_URI:http://localhost:8081/realms/dealer-realm}
+          jwk-set-uri: ${JWT_JWK_SET_URI:http://localhost:8081/realms/dealer-realm/protocol/openid-connect/certs}
+grpc:
+  client:
+    storage-service:
+      address: static://localhost:9090
+      negotiation-type: plaintext
+
+dealer:
+  outbox:
+    enabled: ${OUTBOX_ENABLED:true}

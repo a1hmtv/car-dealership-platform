@@ -1,0 +1,199 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-create-car-model-table
+      author: elizaveta
+      changes:
+        - createTable:
+            tableName: car_model
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: model_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: brand
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: base_price
+                  type: NUMERIC(15, 2)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 004-create-part-table
+      author: elizaveta
+      changes:
+        - createTable:
+            tableName: part
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: component_type
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price_delta
+                  type: NUMERIC(15, 2)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 005-create-part-compatible-car-model-table
+      author: elizaveta
+      changes:
+        - createTable:
+            tableName: part_compatible_car_model
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: part_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: car_model_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: part_compatible_car_model
+            baseColumnNames: part_id
+            referencedTableName: part
+            referencedColumnNames: id
+            constraintName: fk_part_compatible_model_part
+
+        - addForeignKeyConstraint:
+            baseTableName: part_compatible_car_model
+            baseColumnNames: car_model_id
+            referencedTableName: car_model
+            referencedColumnNames: id
+            constraintName: fk_part_compatible_model_car_model
+
+  - changeSet:
+      id: 006-create-base-configuration-item-table
+      author: elizaveta
+      changes:
+        - createTable:
+            tableName: base_configuration_item
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: part_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: car_model_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: component_type
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: base_configuration_item
+            baseColumnNames: part_id
+            referencedTableName: part
+            referencedColumnNames: id
+            constraintName: fk_base_config_item_part
+
+        - addForeignKeyConstraint:
+            baseTableName: base_configuration_item
+            baseColumnNames: car_model_id
+            referencedTableName: car_model
+            referencedColumnNames: id
+            constraintName: fk_base_config_item_car_model

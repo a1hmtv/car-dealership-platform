@@ -1,0 +1,43 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: storage-service
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:dealer}
+    password: ${RABBITMQ_PASSWORD:dealer-local}
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    template:
+      mandatory: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5434/storage_db
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres-local}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${JWT_ISSUER_URI:http://localhost:8081/realms/dealer-realm}
+          jwk-set-uri: ${JWT_JWK_SET_URI:http://localhost:8081/realms/dealer-realm/protocol/openid-connect/certs}
+grpc:
+  server:
+    port: 9090
+
+dealer:
+  outbox:
+    enabled: ${OUTBOX_ENABLED:true}

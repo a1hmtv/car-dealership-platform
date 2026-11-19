@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 009-unique-assembly-source-order
+      author: portfolio
+      changes:
+        - addUniqueConstraint:
+            tableName: assembly_order
+            columnNames: source_order_id
+            constraintName: uq_assembly_order_source_order

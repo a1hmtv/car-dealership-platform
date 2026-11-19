@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 010-seed-demo-part-stock
+      author: portfolio
+      changes:
+        - sql:
+            sql: >
+              INSERT INTO part_stock
+                (id, created_at, updated_at, removed, part_id, total_quantity, reserved_quantity)
+              SELECT '88888888-8888-8888-8888-888888888888', CURRENT_TIMESTAMP,
+                CURRENT_TIMESTAMP, false, id, 10, 0
+              FROM part
+              WHERE id = '55555555-5555-5555-5555-555555555555' AND removed = false
+              ON CONFLICT (part_id) DO NOTHING;

@@ -1,0 +1,252 @@
+databaseChangeLog:
+  - changeSet:
+      id: 008-create-in-stock-order-table
+      author: elizaveta
+      changes:
+        - createTable:
+            tableName: in_stock_order
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: manager_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: car_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_price
+                  type: NUMERIC(15, 2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: in_stock_order
+            baseColumnNames: customer_id
+            referencedTableName: customer
+            referencedColumnNames: id
+            constraintName: fk_in_stock_order_customer
+
+        - addForeignKeyConstraint:
+            baseTableName: in_stock_order
+            baseColumnNames: manager_id
+            referencedTableName: manager
+            referencedColumnNames: id
+            constraintName: fk_in_stock_order_manager
+
+  - changeSet:
+      id: 009-create-custom-order-table
+      author: elizaveta
+      changes:
+        - createTable:
+            tableName: custom_order
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: manager_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: car_model_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: final_price
+                  type: NUMERIC(15, 2)
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: custom_order
+            baseColumnNames: customer_id
+            referencedTableName: customer
+            referencedColumnNames: id
+            constraintName: fk_custom_order_customer
+
+        - addForeignKeyConstraint:
+            baseTableName: custom_order
+            baseColumnNames: manager_id
+            referencedTableName: manager
+            referencedColumnNames: id
+            constraintName: fk_custom_order_manager
+
+        - addForeignKeyConstraint:
+            baseTableName: custom_order
+            baseColumnNames: car_model_id
+            referencedTableName: car_model
+            referencedColumnNames: id
+            constraintName: fk_custom_order_car_model
+
+  - changeSet:
+      id: 010-create-custom-order-part-table
+      author: elizaveta
+      changes:
+        - createTable:
+            tableName: custom_order_part
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: custom_order_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: part_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: custom_order_part
+            baseColumnNames: custom_order_id
+            referencedTableName: custom_order
+            referencedColumnNames: id
+            constraintName: fk_custom_order_part_custom_order
+
+        - addForeignKeyConstraint:
+            baseTableName: custom_order_part
+            baseColumnNames: part_id
+            referencedTableName: part
+            referencedColumnNames: id
+            constraintName: fk_custom_order_part_part
+
+  - changeSet:
+      id: 011-create-test-drive-request-table
+      author: elizaveta
+      changes:
+        - createTable:
+            tableName: test_drive_request
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: car_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_time
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: test_drive_request
+            baseColumnNames: customer_id
+            referencedTableName: customer
+            referencedColumnNames: id
+            constraintName: fk_test_drive_request_customer

@@ -1,0 +1,80 @@
+databaseChangeLog:
+  - changeSet:
+      id: 015-create-storage-outbox-event-table
+      author: elizaveta
+      changes:
+        - createTable:
+            tableName: storage_outbox_event
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: aggregate_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: aggregate_type
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: event_type
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: exchange_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: routing_key
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payload
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: published_at
+                  type: timestamp
+              - column:
+                  name: error_message
+                  type: text
+
+        - createIndex:
+            tableName: storage_outbox_event
+            indexName: idx_storage_outbox_event_status_created_at
+            columns:
+              - column:
+                  name: status
+              - column:
+                  name: created_at

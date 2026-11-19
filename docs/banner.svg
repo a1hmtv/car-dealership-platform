@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title desc">
+  <title id="title">Car Dealership — Backend Engineering</title>
+  <desc id="desc">Two independently deployed services, gRPC and event-driven messaging.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#291a2e"/><stop offset="1" stop-color="#4b2c48"/></linearGradient>
+    <linearGradient id="pink"><stop stop-color="#ffbfdc"/><stop offset="1" stop-color="#bda4f1"/></linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#f4c1de" stroke-opacity=".07"/></pattern>
+  </defs>
+  <rect width="1200" height="300" rx="24" fill="url(#bg)"/>
+  <rect width="1200" height="300" rx="24" fill="url(#grid)"/>
+  <rect x="24" y="24" width="1152" height="252" rx="15" fill="none" stroke="#edb3d2" stroke-opacity=".32"/>
+  <g font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif">
+    <text x="65" y="69" fill="#ffbddc" font-size="14" font-weight="600" letter-spacing="4">BACKEND ENGINEERING  /  JAVA 21</text>
+    <text x="62" y="139" font-size="58" font-weight="700" fill="#fff3fa">Car Dealership</text>
+    <text x="65" y="177" fill="#e3c4e3" font-size="22">Microservices · reliable events · inventory</text>
+    <rect x="65" y="213" width="376" height="32" rx="16" fill="#f6aed0" fill-opacity=".12" stroke="#e9aacb" stroke-opacity=".55"/>
+    <text x="253" y="234" text-anchor="middle" fill="#ffcce6" font-size="13" font-weight="600" letter-spacing="2">SPRING BOOT  /  GRPC  /  RABBITMQ</text>
+    <g stroke="url(#pink)" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M705 182L725 159 762 151 793 115Q800 105 817 105H933Q950 105 966 118L1001 150 1062 161Q1082 167 1082 189V211H1045M986 211H802M743 211H705Z"/>
+      <path d="M777 151L807 120H931L969 151Z M880 120V151 M705 185H734 M1048 173H1076"/>
+      <circle cx="772" cy="211" r="29" fill="#39253a"/><circle cx="772" cy="211" r="12"/><circle cx="1016" cy="211" r="29" fill="#39253a"/><circle cx="1016" cy="211" r="12"/>
+      <path d="M683 237H1102" stroke-opacity=".4"/>
+      <path d="M1050 73h32m-16-16v32M740 81h18m-9-9v18" stroke-opacity=".75"/>
+    </g>
+  </g>
+</svg>

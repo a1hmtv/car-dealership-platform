@@ -1,0 +1,86 @@
+databaseChangeLog:
+  - changeSet:
+      id: 015-create-part-stock-table
+      author: elizaveta
+      changes:
+        - createTable:
+            tableName: part_stock
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: removed
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: part_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    unique: true
+
+              - column:
+                  name: total_quantity
+                  type: INT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: reserved_quantity
+                  type: INT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: part_stock
+            baseColumnNames: part_id
+            referencedTableName: part
+            referencedColumnNames: id
+            constraintName: fk_part_stock_part
+
+        - createIndex:
+            tableName: part_stock
+            indexName: idx_part_stock_part_id
+            columns:
+              - column:
+                  name: part_id
+
+        - sql:
+            sql: >
+              ALTER TABLE part_stock
+              ADD CONSTRAINT chk_part_stock_total_quantity_non_negative
+              CHECK (total_quantity >= 0);
+
+        - sql:
+            sql: >
+              ALTER TABLE part_stock
+              ADD CONSTRAINT chk_part_stock_reserved_quantity_non_negative
+              CHECK (reserved_quantity >= 0);
+
+        - sql:
+            sql: >
+              ALTER TABLE part_stock
+              ADD CONSTRAINT chk_part_stock_reserved_not_greater_than_total
+              CHECK (reserved_quantity <= total_quantity);

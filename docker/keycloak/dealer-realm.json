@@ -1,0 +1,137 @@
+{
+  "realm": "dealer-realm",
+  "enabled": true,
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "rememberMe": true,
+  "roles": {
+    "realm": [
+      {
+        "name": "USER"
+      },
+      {
+        "name": "MANAGER"
+      },
+      {
+        "name": "WAREHOUSE_ADMIN"
+      },
+      {
+        "name": "ADMIN"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "dealer-api",
+      "name": "dealer-api",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "bearerOnly": false,
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "fullScopeAllowed": true,
+      "defaultClientScopes": [
+        "web-origins",
+        "acr",
+        "profile",
+        "roles",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access",
+        "microprofile-jwt"
+      ],
+      "redirectUris": [
+        "*"
+      ],
+      "webOrigins": [
+        "*"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "user1",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Test",
+      "lastName": "User",
+      "email": "user1@example.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user1",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "USER"
+      ]
+    },
+    {
+      "username": "manager1",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Test",
+      "lastName": "Manager",
+      "email": "manager1@example.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "manager1",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "MANAGER",
+        "USER"
+      ]
+    },
+    {
+      "username": "warehouse1",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Test",
+      "lastName": "Warehouse",
+      "email": "warehouse1@example.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "warehouse1",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "WAREHOUSE_ADMIN"
+      ]
+    },
+    {
+      "username": "admin1",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Test",
+      "lastName": "Admin",
+      "email": "admin1@example.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin1",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "ADMIN",
+        "MANAGER",
+        "WAREHOUSE_ADMIN",
+        "USER"
+      ]
+    }
+  ]
+}
